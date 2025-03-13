@@ -1,0 +1,238 @@
+% arara: xelatex
+\documentclass[12pt]{article}
+
+% Econometrics, 2024-2025
+
+% \usepackage{physics}
+
+\usepackage{verse}
+
+\usepackage{tikzducks}
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amsfonts, amssymb} % куча стандартных математических плюшек
+
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{hyperref} % loads url
+% \usepackage{url} % to use \url{link to web}
+\urlstyle{same}
+
+
+\newcommand{\smallduck}{\begin{tikzpicture}[scale=0.3]
+    \duck[
+        cape=black,
+        hat=black,
+        mask=black
+    ]
+    \end{tikzpicture}}
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{Домашние задания для самураев}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{tcolorbox} % рамочки!
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+\setcounter{MaxMatrixCols}{20}
+% by crazy default pmatrix supports only 10 cols :)
+
+
+\usepackage{fontspec}
+\usepackage{libertine}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+% \setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+% \newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+% \setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+\DeclareMathOperator{\hVar}{\widehat{\mathbb{V}ar}}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+% \DeclareMathOperator{\tr}{trace}
+\DeclareMathOperator{\card}{card}
+
+\DeclareMathOperator{\Convex}{Convex}
+
+\newcommand \cN{\mathcal{N}}
+\newcommand \RR{\mathbb{R}}
+\newcommand \NN{\mathbb{N}}
+
+\newcommand{\dU}{\mathrm{Unif}}
+\newcommand{\dUnif}{\mathrm{Unif}}
+
+\DeclareMathOperator{\loss}{loss}
+
+\newcommand{\hy}{\hat y}
+\newcommand{\hb}{\hat\beta}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\scalp}{\langle}{\rangle}
+
+
+\begin{document}
+
+\section*{Домашнее задание 1}
+
+Дедлайн: 2025-03-20, 21:00.
+
+Оцениваемая часть:
+
+\begin{enumerate}
+\item В красном мешке у Деда Мороза 5 красных и 4 синих шара, а в синем мешке — 3 красных и 10 синих шаров. 
+Сначала Дед Мороз выбирает один из мешков равновероятно. 
+Затем Дед Мороз достаёт из выбранного мешка один шар.
+А затем Дед Мороз достаёт ещё два шара из \emph{другого} мешка.
+
+Обозначим $R$ — общее число красных извлечённых шаров, и $B$ — общее число синих шаров.
+
+\begin{enumerate}
+    \item Составьте табличку распределения случайной величины $R$.
+    \item Найдите $\P(R \text{ — чётное})$, $\E(R)$, $\E(2B + 7)$, $\E(R\cdot B)$.
+    \item Найдите $\P(R \geq 1, B \geq 1)$, $\E(R \cdot I(B\geq 1))$.
+\end{enumerate}
+
+Напоминалочка: $I(A)$ — индикатор события $A$, случайная величина, равная $1$, если событие $A$ произошло и $0$ — иначе.
+
+
+\item У Илона Маска две монетки: $A$-монетка выпадает орлом с вероятностью $0.3$, $B$-монетка выпадает орлом с вероятностью $0.4$.
+Каждая из монеток выпадает либо решкой, либо орлом. 
+Всего Илон делает $100$ подбрасываний. 
+Сначала Илон Маск подбрасывает монетку $A$. 
+Затем он действует по простому правилу: если выпал орёл, то следующей будет подброшена монетка $A$, если выпала решка,
+то следующией будет подброшена монетка $B$.
+Обозначим $X$ — общее число выпавших орлов, $Y$ — общее число орлов выпавших на монетке $B$.
+
+\begin{enumerate}
+    \item Найдите $\E(X)$ и $\E(Y)$.
+    \item Найдите $\E(XY)$.
+\end{enumerate}
+
+\end{enumerate}
+
+Прекрасная неоцениваемая часть в удовольствие:
+
+\begin{enumerate}[resume]
+    \item У Маши две монетки: золотая и серебряная.
+Сначала Маша подкидывает золотую монетку.
+Если золотая монетка выпала орлом, то Маша подкидывает серебряную монетку один раз.
+Если золотая монетка выпала решкой — то подкидывает серебряную два раза.
+
+Пусть $X$ — общее количество выпавших орлов на золотой и серебряной монетках.
+
+\begin{enumerate}
+\item Найдите все возможные значения $X$ и их вероятности.
+\item Каково ожидаемое количество выпавших орлов?
+\end{enumerate}
+
+    \item Вспомним свойство аддитивности вероятности. 
+    $A$: Если задан набор несовместных событий $A_1$, $A_2$, \dots, ($A_i \cap A_j = \emptyset$ при $i\neq j$),
+    то $\P(\cup A_i) = \sum_i \P(A_i)$.
+
+    Докажите, что свойство аддитивности эквивалентно свойству $B$ и свойству $C$.
+
+    $B$: Если задан набор вложенных событий $B_1 \subseteq B_2 \subseteq B_3 \dots$, то $\lim_i \P(B_i) = \P(\lim_i B_i)$.
+
+    $C$: Если задан набор вложенных событий $\dots C_3 \subseteq C_2 \subseteq C_1$, то $\lim_i \P(C_i) = \P(\lim_i C_i)$.
+
+    \item В шкатулке у Маши 100 пар серёжек. 
+    Каждый день утром она выбирает одну пару наугад, носит ее, а вечером возвращает в шкатулку. 
+    Проходит год.
+    \begin{enumerate}
+    \item Сколько в среднем пар окажутся ни разу не надетыми?
+    \item Сколько в среднем пар окажутся надетыми не менее двух раз?
+\end{enumerate}
+    \item  Над озером взлетело 20 уток. 
+    Каждый из 10 охотников один раз стреляет в случайно выбираемую им утку. 
+    Охотники целятся одновременно, поэтому несколько охотников могут выбрать одну и ту же утку.
+    Величина $Y$ — количество выживших уток, $X$ — количество попавших в цель охотников. 
+   
+   \begin{enumerate}
+     \item Найдите $\E(X)$, $\E(Y)$, если охотники стреляют без промаха. 
+     \item Как изменятся ответы, если вероятность попадания равна $0.7$?
+   \end{enumerate}
+   
+\end{enumerate}
+    
+
+\section*{Домашнее задание 2}
+
+Дедлайн: 2025-03-27, 21:00.
+
+Оцениваемая часть:
+
+\begin{enumerate}
+\item 
+\end{enumerate}
+
+Прекрасная неоцениваемая часть в удовольствие:
+
+\begin{enumerate}
+    \item 
+\end{enumerate}
+
+\end{document}
+
+
+
+% проектируемая часть ниже ....
