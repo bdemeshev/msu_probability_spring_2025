@@ -1,0 +1,208 @@
+% arara: xelatex
+\documentclass[12pt]{article}
+
+% \usepackage{physics}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\usepackage{tikzducks}
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amsfonts, amssymb} % куча стандартных математических плюшек
+
+\usepackage{mathtools}
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{url} % to use \url{link to web}
+
+
+\newcommand{\smallduck}{\begin{tikzpicture}[scale=0.3]
+    \duck[
+        cape=black,
+        hat=black,
+        mask=black
+    ]
+    \end{tikzpicture}}
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{Счастье 2025}
+\lfoot{Можно использовать чит-лист А4 и простой калькулятор, продолжительность: 120 минут. }
+\cfoot{}
+\rfoot{}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\usepackage{tcolorbox} % рамочки!
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos - печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+\setcounter{MaxMatrixCols}{20}
+% by crazy default pmatrix supports only 10 cols :)
+
+
+\usepackage{fontspec}
+\usepackage{libertine}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+% \setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+% \newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{\mathbb{C}ov}
+\DeclareMathOperator{\BestLin}{BestLin}
+\DeclareMathOperator{\Corr}{\mathbb{C}orr}
+\DeclareMathOperator{\Var}{\mathbb{V}ar}
+\DeclareMathOperator{\pCorr}{\mathrm{pCorr}}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\plim}{plim}
+\DeclareMathOperator{\pe}{pe}
+
+
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+
+\let\H\relax
+\DeclareMathOperator{\H}{\mathbb{H}}
+
+
+\DeclareMathOperator{\E}{\mathbb{E}}
+% \DeclareMathOperator{\tr}{trace}
+\DeclareMathOperator{\card}{card}
+
+\DeclareMathOperator{\Convex}{Convex}
+
+\newcommand \cN{\mathcal{N}}
+\newcommand \dN{\mathcal{N}}
+\newcommand \dBin{\mathrm{Bin}}
+\newcommand \dUnif{\mathrm{Unif}}
+
+
+\newcommand \RR{\mathbb{R}}
+\newcommand \NN{\mathbb{N}}
+
+\newcommand{\dBern}{\mathrm{Bern}}
+
+
+
+\begin{document}
+
+
+
+\begin{enumerate}
+\item У меня в ящике три кубика: два — правильных, а на третьем — три двойки и три четвёрки. 
+Я извлекаю из ящика равновероятно два кубика, а затем подбрасываю каждый из них по одному разу. 
+Обозначим результаты бросков как $X_1$ и $X_2$.
+\begin{enumerate}
+    \item {[3]} Найдите $\P(X_2 = 2 \mid X_1 = 2)$. 
+    \item {[3]} Правда ли, что величины $X_1$ и $X_2$ независимы?
+    \item {[4]} Какова вероятность того, что оба выбранных кубика — правильные, если оба раза выпала двойка?
+\end{enumerate}
+
+
+\item Джеймс Бонд десантируется в случайную точку $(X, Y)$ равномерно выбираемую на периметре треугольника 
+с вершинами $(0, 0)$, $(0, 1)$ и $(4, 0)$.
+
+\begin{enumerate}
+    \item {[5]} Найдите $\E(Y \mid X = 0)$ и $\E(Y \mid X > 0)$.
+    \item {[5]} Найдите $\E(Y \mid X)$ и $\Var(Y \mid X)$.
+\end{enumerate}
+
+\item Величины $(X_n)$ независимы и экспоненциально распределены с интенсивностью $\lambda$.
+
+\begin{enumerate}
+  \item {[5]} Найдите предел 
+  $\plim (X_1^2 + X_2^2 + \dots + X_n^2)/(3n + 100)$.
+  \item {[5]} Найдите предел 
+  $\plim \sum_{i=1}^n(X_i - \bar X)^2 / n, \text{ где } \bar X = (X_1 + X_2 + \dots + X_n) / n$.
+\end{enumerate}
+
+\item  Сейчас акция стоит 100 рублей. 
+Каждый день цена может равновероятно и независимо от предыстории либо возрасти на 8\%, либо упасть на 5\%.
+\begin{enumerate}
+\item {[5]} Какова вероятность того, что через 64 дня цена будет больше 110 рублей?
+\item {[5]} Какой порог цены акции через 64 дня будет превышен с вероятностью $0.1$?
+\end{enumerate}
+
+Уточнение: $\ln(1.08) = 0.077$, $\ln(0.95) = -0.051$, $\ln(1.1) = 0.095$, запишите ответы с использованием функции распределения и посчитайте их по таблице.
+
+\item Величины $X_1$ и $X_2$ независимы, их плотности, соответственно, равны $f_1(x)$ и $f_2(x)$.
+\begin{enumerate}
+    \item {[3]} Найдите совместную функцию плотности вектора $(X_1, X_2)$.
+    Запишите соответствующий элемент вероятности $\pe(x_1, x_2)$. 
+    \item {[4]} Найдите совместную функцию плотности вектора $(X_1, S)$, где $S = X_1 + X_2$.
+    Запишите соответсвующий элемент вероятности $\pe(x_1, s)$.
+    \item {[3]} Запишите функцию плотности величины $S$ в виде интеграла. 
+\end{enumerate}
+
+Уточнение: под элементом вероятности мы подразумеваем дифференциальную форму $\pe(x, y) = f(x, y) dx \wedge dy$.
+
+\item Кржмелик загадал два различных натуральных числа, написал их на бумажках и взял одну бумажку в левую руку, а другую — в правую.
+Вахмурка выбирает одну руку Кржемелика равновероятно наугад и узнает число, написанное на этой бумажке.
+Задача Вахмурки — отгадать, большее или меньшее из двух чисел он узнал.
+
+У Вахмурки есть правильная монетка. 
+\begin{enumerate}
+    \item {[2]} Предложите Вахмурке стратегию, которая гарантирует вероятность угадывания ровно $0.5$ вне зависимости от действий Кржмелика.
+    \item {[8]} Предложите Вахмурке стратегию, которая гарантирует вероятность угадывания строго больше $0.5$ вне зависимости от действий Кржмелика.
+\end{enumerate}
+\end{enumerate}
+
+\end{document}
+
